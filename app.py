@@ -1,5 +1,7 @@
 import sys
-from flask import Flask, jsonify
+from crypt import methods
+
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -55,6 +57,15 @@ def get_drinks():
 def get_drink(id):
     drink = Drink.query.get_or_404(id)
     return {"name": drink.name, "description": drink.description}
+
+@app.route('/drinks', methods=['POST'])
+def add_drink():
+    drink = Drink(name = request.json['name'], description = request.json['description'])
+    db.session.add(drink)
+    db.session.commit()
+    return {'id':drink.id}
+
+
 
 # TERMINAL COMMAND FUNCTIONS
 def create_db():
