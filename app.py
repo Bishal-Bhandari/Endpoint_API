@@ -38,6 +38,19 @@ class Drink(db.Model):
     def __repr__(self):
         return f"{self.id} | {self.name} - {self.description}"
 
+@app.route('/')
+def index():
+    return  'Hello1'
+
+@app.route('/drinks')
+def get_drinks():
+    drinks = Drink.query.all()
+    output = []
+    for drink in drinks:
+        drink_data = {'name': drink.name, 'description': drink.description}
+        output.append(drink_data)
+    return {'drinks': output}
+
 
 # TERMINAL COMMAND FUNCTIONS
 def create_db():
