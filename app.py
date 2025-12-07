@@ -3,9 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DARABASE_URI']
+app.config['SQLALCHEMY_DARABASE_URI'] = 'sqlite:///data.db'
+db = SQLAlchemy(app)
 
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key = True)
