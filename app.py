@@ -40,6 +40,7 @@ class Drink(db.Model):
     def __repr__(self):
         return f"{self.id} | {self.name} - {self.description}"
 
+#API Methods
 @app.route('/')
 def index():
     return  'Hello1'
@@ -145,4 +146,4 @@ if __name__ == '__main__':
         delete_drink(int(args[2]))
 
     else:
-        print("Unknown command!")
+        print("Unknown command!!!")
