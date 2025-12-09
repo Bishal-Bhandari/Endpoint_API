@@ -138,9 +138,7 @@ if __name__ == '__main__':
         list_drinks()
     elif command == "update":
         update_drink(int(args[2]), args[3], args[4])
-
     elif command == "delete":
         delete_drink(int(args[2]))
-
     else:
         print("Unknown command!!!")
