@@ -132,13 +132,10 @@ if __name__ == '__main__':
 
     if command == "create_db":
         create_db()
-
     elif command == "add":
         add_drink(args[2], args[3])
-
     elif command == "list":
         list_drinks()
-
     elif command == "update":
         update_drink(int(args[2]), args[3], args[4])
 
