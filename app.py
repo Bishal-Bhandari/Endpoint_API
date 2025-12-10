@@ -87,26 +87,6 @@ def update_drink(id):
         'description': drink.description
     }
 
-@app.route('/drinks/<int:id>', methods=['PUT'])
-def update_drink(id):
-    drink = Drink.query.get(id)
-
-    if not drink:
-        return {'error': 'Drink not found'}, 404
-
-    data = request.get_json()
-
-    drink.name = data.get('name', drink.name)
-    drink.description = data.get('description', drink.description)
-
-    db.session.commit()
-
-    return {
-        'id': drink.id,
-        'name': drink.name,
-        'description': drink.description
-    }
-
 @app.route('/drinks/<int:id>', methods = ['PATCH'])
 def patch_drinks(id):
     drink = Drink.query.get(id)
