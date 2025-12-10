@@ -87,6 +87,48 @@ def update_drink(id):
         'description': drink.description
     }
 
+@app.route('/drinks/<int:id>', methods=['PUT'])
+def update_drink(id):
+    drink = Drink.query.get(id)
+
+    if not drink:
+        return {'error': 'Drink not found'}, 404
+
+    data = request.get_json()
+
+    drink.name = data.get('name', drink.name)
+    drink.description = data.get('description', drink.description)
+
+    db.session.commit()
+
+    return {
+        'id': drink.id,
+        'name': drink.name,
+        'description': drink.description
+    }
+
+@app.route('/drinks/<int:id>', methods = ['PATCH'])
+def patch_drinks(id):
+    drink = Drink.query.get(id)
+
+    if not drink:
+        return {'Error':'Not found'},404
+    data = request.get_json()
+
+    if 'name' in data:
+        drink.name = data['name']
+
+    if 'description' in data:
+        drink.description = data['description']
+
+    db.session.commit()
+
+    return {
+        'id': drink.id,
+        'name': drink.name,
+        'description': drink.description
+    },200
+
 @app.route('/drinks/<id>', methods=['DELETE'])
 def delete_drink(id):
     drink = Drink.query.get(id)
