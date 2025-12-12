@@ -116,6 +116,11 @@ def delete_drink(id):
     db.session.commit()
     return {'Message': "DOne!!"}
 
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": "Resource not found"}),404
+
+
 # TERMINAL COMMAND FUNCTIONS
 def create_db():
     with app.app_context():
