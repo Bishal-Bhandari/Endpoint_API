@@ -50,19 +50,19 @@ def get_drinks():
     for drink in drinks:
         drink_data = {'name': drink.name, 'description': drink.description}
         output.append(drink_data)
-    return {'drinks': output}
+    return {'drinks': output},200
 
 @app.route('/drinks/<id>')
 def get_drink(id):
     drink = Drink.query.get_or_404(id)
-    return {"name": drink.name, "description": drink.description}
+    return {"name": drink.name, "description": drink.description},200
 
 @app.route('/drinks', methods=['POST'])
 def add_drink():
     drink = Drink(name = request.json['name'], description = request.json['description'])
     db.session.add(drink)
     db.session.commit()
-    return {'id':drink.id}
+    return {'id':drink.id},200
 
 
 @app.route('/drinks/<int:id>', methods=['PUT'])
@@ -83,7 +83,7 @@ def update_drink(id):
         'id': drink.id,
         'name': drink.name,
         'description': drink.description
-    }
+    },200
 
 @app.route('/drinks/<int:id>', methods = ['PATCH'])
 def patch_drinks(id):
@@ -114,7 +114,7 @@ def delete_drink(id):
         return {"NO DRINK!!!"}
     db.session.delete(drink)
     db.session.commit()
-    return {'Message': "DOne!!"}
+    return {'Message': "DOne!!"},200
 
 @app.errorhandler(404)
 def not_found(e):
