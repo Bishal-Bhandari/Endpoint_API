@@ -50,7 +50,12 @@ def get_drinks():
 
     drinks = Drink.query.paginate(page=page, per_page=per_page, error_out=False)
 
-
+    return {
+        "items": [{'id': d.id, 'name': d.name, 'description': d.description} for d in drinks.items],
+        "total": drinks.total,
+        "page": drinks.page,
+        "pages": drinks.pages
+    }
 
 
 @app.route('/drinks/<id>')
