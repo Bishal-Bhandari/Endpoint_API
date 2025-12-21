@@ -45,12 +45,10 @@ def index():
 
 @app.route('/drinks')
 def get_drinks():
-    drinks = Drink.query.all()
-    output = []
-    for drink in drinks:
-        drink_data = {'name': drink.name, 'description': drink.description}
-        output.append(drink_data)
-    return {'drinks': output},200
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+
+
 
 @app.route('/drinks/<id>')
 def get_drink(id):
