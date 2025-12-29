@@ -58,7 +58,7 @@ def add_drink():
 
     drink = Drink(**data)
     drink.save()
-    return drink_schema.dump(drink), 201
+    return drink_schema.dump(drink), 200
 
 
 @app.route('/drinks/<id>')
