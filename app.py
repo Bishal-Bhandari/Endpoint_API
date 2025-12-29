@@ -1,6 +1,7 @@
 import sys
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields, ValidationError
 
 app = Flask(__name__)
 
