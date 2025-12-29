@@ -14,6 +14,7 @@ class DrinkSchema(Schema):
     name = fields.String(required=True)
     description = fields.String(required=True)
 
+drink_schema = DrinkSchema()
 
 # MODEL
 class Drink(db.Model):
