@@ -10,6 +10,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+class DrinkSchema(Schema):
+    name = fields.String(required=True)
+    description = fields.String(required=True)
+
 
 # MODEL
 class Drink(db.Model):
