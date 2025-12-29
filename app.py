@@ -49,19 +49,16 @@ class Drink(db.Model):
 def index():
     return  'Hello1'
 
-@app.route('/drinks')
-def get_drinks():
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 10, type=int)
+@app.route('/drinks', methods=['POST'])
+def add_drink():
+    try:
+        data = drink_schema.load(request.json)
+    except ValidationError as err:
+        return err.messages, 400
 
-    drinks = Drink.query.paginate(page=page, per_page=per_page, error_out=False)
-
-    return {
-        "items": [{'id': d.id, 'name': d.name, 'description': d.description} for d in drinks.items],
-        "total": drinks.total,
-        "page": drinks.page,
-        "pages": drinks.pages
-    }
+    drink = Drink(**data)
+    drink.save()
+    return drink_schema.dump(drink), 201
 
 
 @app.route('/drinks/<id>')
